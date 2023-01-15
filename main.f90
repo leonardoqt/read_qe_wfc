@@ -1,8 +1,7 @@
 program test
 	!
 	use read_qe_wfc,        only: print_header, read_single_wfc, read_upto_n_wfc, read_all_wfc, &
-	                              overlap, ik, nbnd, ispin, npol, ngw, igwx, xk, gamma_only
-	use iso_fortran_env,    only: dp=> real64
+	                              overlap, ik, nbnd, ispin, npol, ngw, igwx, xk, gamma_only, dp
 	!
 	implicit none
 	!
@@ -12,14 +11,15 @@ program test
 	character(100)            :: filename
 	!
 	integer :: t1
-	write(kpoint,'(I4)') 0
+	write(kpoint,'(I4)') 3
 	filename = "wfc"//trim(adjustl(kpoint))//".dat"
 	!
-	call print_header(filename)
+	!call print_header(filename)
 	!call read_single_wfc(ibnd, filename, evc0)
-	call read_upto_n_wfc(ibnd, filename, evc1)
+	!call read_upto_n_wfc(ibnd, filename, evc1)
+	call read_all_wfc(filename, evc1)
 	!
-	do t1 = 1, ibnd
+	do t1 = 1, nbnd
 		write(*,*) "norm 1,",t1," =", overlap(evc1(:,1),evc1(:,t1))
 	enddo
 	!

@@ -180,6 +180,8 @@ module read_qe_wfc
 		character(len=*)        , intent(in)   :: filename
 		complex(dp), allocatable, intent(out)  :: evc(:,:)
 		!
+		!call read_header_only(filename)
+		! because the address of nbnd is passed, no need to worry it has no valued yet
 		call read_upto_n_wfc(nbnd, filename, evc)
 		!
 	end subroutine read_all_wfc
